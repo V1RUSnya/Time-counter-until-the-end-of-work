@@ -9,22 +9,18 @@ def zerozero(number):
     return n
 
 def difference(actual_time):
-    wait_time_hour = 16
-    wait_time_minute = 30
-    difference_hour = int(actual_time[0:2])
-    difference_minute = int(actual_time[3:5])
-    wait_second = 60 - int(actual_time[6:8])
-    os.system('cls')
-    if int(actual_time[3:5])>30:
-        wait_minute = 60 - int(actual_time[3:5])
-    else:
-        wait_minute = wait_time_minute - int(actual_time[3:5])
-    if int(wait_time_hour - difference_hour) > 0 and int(wait_time_hour - difference_hour) < 5:
+    all_wait_time = 16*3600 + 30*60
+    difference_time = int(actual_time[0:2])*3600 + int(actual_time[3:5])*60
+    dif = all_wait_time - difference_time
+    dif = dif/60
+    hours = dif // 60
+    minutes = dif % 60
+    if int(hours) > 0 and int(hours) < 5:
         hour = "часа"
     else:
         hour = "часов"
-        
-    print(f"Время: {actual_time}\nОсталось работать: {wait_time_hour - difference_hour} {hour}, {wait_minute} минут и {wait_second} секунд")
+    os.system('cls')
+    print(f"Время: {actual_time}\nОсталось работать: {int(hours)} {hour} и {int(minutes)} минут")
 
 def timer(memory):
     time = datetime.datetime.now()
